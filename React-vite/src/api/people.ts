@@ -1,5 +1,5 @@
 import api from "./api";
-import { GetPeopleResponse, People } from "../types/people";
+import { GetPeopleResponse, Person } from "../types/people";
 
 export async function getPeople(pageNumber: number, search?: string) {
   const { data } = await api.get<GetPeopleResponse>("/people", {
@@ -13,6 +13,6 @@ export async function getPeople(pageNumber: number, search?: string) {
 
 export async function fetchPersonDetails(id?: string) {
   const url = `/people/${id}`;
-  const { data } = await api.get<People>(url);
+  const { data } = await api.get<Person>(url);
   return data;
 }

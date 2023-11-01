@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { getPeople } from "../../api/people";
 import PaginatedTable from "../../components/Table/Table";
-import { People } from "../../types/people";
+import { Person } from "../../types/people";
 import "./styles.css";
 import { QueryKeys } from "../../constants/queryKeys";
 import { getPeopleId } from "../../utils";
@@ -13,8 +13,8 @@ import { getPeopleId } from "../../utils";
 export function Home() {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState<People[]>([]);
-  const [searchResults, setSearchResults] = useState<People[]>([]);
+  const [results, setResults] = useState<Person[]>([]);
+  const [searchResults, setSearchResults] = useState<Person[]>([]);
   const { data, isLoading, isError } = useQuery(
     [QueryKeys.People, page, search],
     () => getPeople(page + 1, search)
@@ -38,16 +38,8 @@ export function Home() {
     setSearch(event.target.value);
   };
 
-  const getRows = (rows: People[]) => {
-    // Filter the data based on the search input
-    const filteredData = rows.filter((data) =>
-      Object.values(data).some(
-        (value) =>
-          value !== null &&
-          value.toString().toLowerCase().includes(search.toLowerCase())
-      )
-    );
-    return filteredData.map((item) => ({
+  const getRows = (rows: Person[]) => {
+    return rows.map((item) => ({
       name: item.name,
       gender: item.gender,
       height: item.height,
@@ -72,7 +64,7 @@ export function Home() {
     <div className="container">
       <label className="label">Star War</label>
       <TextField
-        label="Search"
+        label="Search By Name"
         variant="standard"
         value={search}
         onChange={handleSearchChange}

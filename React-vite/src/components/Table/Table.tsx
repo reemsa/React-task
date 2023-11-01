@@ -36,6 +36,7 @@ interface PaginatedTableProps {
   columns: string[]; // Table column headers
   rows: { [key: string]: React.ReactNode }[]; // Table data using the generic type
   maxHeight?: number;
+  minWidth?: number;
   count?: number;
   rowsPerPage?: number;
   isLoading?: boolean;
@@ -49,6 +50,7 @@ export default function PaginatedTable({
   columns,
   count,
   maxHeight = 400,
+  minWidth = 500,
   rowsPerPage = 10,
   showPagination = true,
   isLoading = false,
@@ -72,7 +74,7 @@ export default function PaginatedTable({
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight }}>
         <Table
-          sx={{ minWidth: 500 }}
+          sx={{ minWidth }}
           aria-label="custom pagination table"
           stickyHeader
         >

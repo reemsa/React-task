@@ -5,11 +5,17 @@
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.16",
     "axios": "^1.6.0",
+    "chart.js": "^4.4.0",
+    "chartjs-plugin-annotation": "^3.0.1",
     "date-fns": "^2.30.0",
+    "lodash-es": "^4.17.21",
+    "react-chartjs-2": "^5.2.0",
     "react-query": "^3.39.3",
-    "react-router-dom": "^6.18.0"
+    "react-router-dom": "^6.18.0",
+    "victory": "^36.6.11"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.10",
     "sass": "^1.69.5"
   }
 }

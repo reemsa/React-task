@@ -10,15 +10,24 @@ import { QueryKeys } from "../../constants/queryKeys";
 import { fetchPersonDetails } from "../../api/people";
 import styles from "./styles.module.scss";
 import PaginatedTable from "../../components/Table/Table";
+import { getFilms } from "../../api/films";
 
 export function Details() {
   const { peopleId } = useParams();
+  const {
+    data: films,
+    isLoading: isFilmsLoading,
+    isError: isErrorFetchingFilms,
+  } = useQuery([QueryKeys.Films], () => getFilms());
   const { data, isLoading, isError } = useQuery(
     [QueryKeys.Details, peopleId],
     () => fetchPersonDetails(peopleId),
     {
       enabled: !!peopleId,
     }
+  );
+  const personFilms = (films ?? []).filter((film) =>
+    (data?.films ?? []).includes(film.url)
   );
   const details = data
     ? [
@@ -34,7 +43,7 @@ export function Details() {
       ]
     : [];
 
-  if (isError) {
+  if (isError || isErrorFetchingFilms) {
     return (
       <Alert variant="filled" severity="error">
         Error fetching data
@@ -42,7 +51,7 @@ export function Details() {
     );
   }
 
-  if (isLoading) {
+  if (isLoading || isFilmsLoading) {
     return <CircularProgress />;
   }
 
@@ -63,9 +72,14 @@ export function Details() {
           <label className={styles["sub-label"]}>Persons Films</label>
           <PaginatedTable
             columns={["Title", "Director", "Release Date"]}
-            rows={[]}
-            maxHeight={200}
+            rows={personFilms.map((film) => ({
+              title: film.title,
+              director: film.director,
+              release_date: film.release_date,
+            }))}
+            maxHeight={300}
             showPagination={false}
+            minWidth={480}
           />
         </div>
       </div>
