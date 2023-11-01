@@ -11,3 +11,11 @@
   line-height: 20px;
   text-transform: capitalize;
 }
+
+.button {
+  font-family: monospace !important;
+}
+
+.button:hover {
+  color: white !important;
+}

@@ -9,6 +9,7 @@ import { Person } from "../../types/people";
 import "./styles.css";
 import { QueryKeys } from "../../constants/queryKeys";
 import { getPeopleId } from "../../utils";
+import { fontFamily } from "../../constants";
 
 export function Home() {
   const [page, setPage] = useState(0);
@@ -45,7 +46,11 @@ export function Home() {
       height: item.height,
       eye_color: item.eye_color,
       details: (
-        <Button variant="contained" href={`/details/${getPeopleId(item.url)}`}>
+        <Button
+          variant="contained"
+          href={`/details/${getPeopleId(item.url)}`}
+          className="button"
+        >
           Details
         </Button>
       ),
@@ -70,6 +75,16 @@ export function Home() {
         onChange={handleSearchChange}
         fullWidth
         color="primary"
+        InputProps={{
+          style: {
+            fontFamily,
+          },
+        }}
+        InputLabelProps={{
+          style: {
+            fontFamily,
+          },
+        }}
       />
       <PaginatedTable
         columns={["Name", "Gender", "Height", "Eye color", " "]}

@@ -1,5 +1,7 @@
 .label {
   font-weight: bold;
+  font-size: 1.25rem;
+  text-decoration: underline;
 }
 
 .details-container {
@@ -15,26 +17,38 @@
   width: 28%;
   flex: 1;
   min-width: 180px;
-  border: 1px solid;
+  border: 1px solid #e0e0e0;
   height: 100%;
+  background: #f7f7f7;
 }
+
 .right-container {
   width: 70%;
-  border-left: 1px solid;
   padding: 12px;
   display: flex;
   flex-direction: column;
-  border: 1px solid;
+  border: 1px solid #e0e0e0;
   flex: 1;
+  background: #f7f7f7;
 }
+
 .list-item {
   > div {
     display: flex;
     gap: 4px;
+    > span {
+      font-family: monospace;
+      font-weight: bold;
+    }
+    > p {
+      font-family: monospace;
+      font-weight: 500;
+    }
   }
 }
 
 .sub-label {
   font-weight: bold;
   padding-bottom: 12px;
+  font-size: 1rem;
 }

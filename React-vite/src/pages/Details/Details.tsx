@@ -69,7 +69,7 @@ export function Details() {
           </List>
         </div>
         <div className={styles["right-container"]}>
-          <label className={styles["sub-label"]}>Persons Films</label>
+          <label className={styles["sub-label"]}>Persons Films:</label>
           <PaginatedTable
             columns={["Title", "Director", "Release Date"]}
             rows={personFilms.map((film) => ({
