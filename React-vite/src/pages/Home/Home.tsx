@@ -70,11 +70,11 @@ export function Home() {
       <label className="label">Star War</label>
       <TextField
         label="Search By Name"
-        variant="standard"
+        variant="outlined"
         value={search}
         onChange={handleSearchChange}
         fullWidth
-        color="primary"
+        color="info"
         InputProps={{
           style: {
             fontFamily,

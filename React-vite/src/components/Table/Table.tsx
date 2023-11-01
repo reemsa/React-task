@@ -17,7 +17,7 @@ import { fontFamily } from "../../constants";
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     fontSize: 16,
-    fontWeight: 500,
+    fontWeight: "bold",
     minWidth: "25%",
     maxWidth: "25%",
   },
