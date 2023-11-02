@@ -23,11 +23,15 @@ export function People() {
   );
   useEffect(() => {
     if (data?.results) {
+      console.log(results);
+      console.log(data.results);
       search
-        ? setSearchResults(data?.results)
+        ? setSearchResults(
+            data.count > 10 ? [...searchResults, ...data.results] : data.results
+          )
         : setResults([...results, ...data.results]);
     }
-  }, [data?.pageNumber, data?.results, results, search]);
+  }, [data?.results, search]);
 
   const handleSearchChange = (event: {
     target: { value: React.SetStateAction<string> };
