@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import { QueryClient, QueryClientProvider } from "react-query";
+import People from "./pages/People";
 
 const queryClient = new QueryClient();
 const CharactersLazy = React.lazy(() => import("./pages/Characters"));
@@ -12,11 +13,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/characters" element={<CharactersLazy />} />
-          <Route path="/details/:peopleId" element={<DetailsLazy />} />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/people" element={<People />} />
+            <Route path="/characters" element={<CharactersLazy />} />
+            <Route path="/details/:peopleId" element={<DetailsLazy />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </QueryClientProvider>
   );

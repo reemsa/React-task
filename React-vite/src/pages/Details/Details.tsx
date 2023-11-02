@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -53,7 +53,9 @@ export function Details() {
 
   return (
     <div>
-      <label className={styles.label}>Person Detail Page:</label>
+      <Link className={styles.label} to="/people">
+        Person Detail Page:
+      </Link>
       <div className={styles["details-container"]}>
         <div className={styles["left-container"]}>
           <List>

@@ -6,6 +6,7 @@ import { VictoryChart, VictoryBar, VictoryAxis, VictoryTheme } from "victory";
 import styles from "./styles.module.scss";
 import { getBarColor } from "../../utils";
 import { Toaster } from "../../components/Toaster/Toaster";
+import { Link } from "react-router-dom";
 
 export function Characters() {
   const {
@@ -30,7 +31,9 @@ export function Characters() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <label className={styles.title}>Films characters chart</label>
+        <Link className={styles.title} to="/">
+          Films characters chart
+        </Link>
         <VictoryChart domainPadding={{ x: 20 }} theme={VictoryTheme.material}>
           <VictoryAxis tickFormat={() => ""} />
           <VictoryAxis dependentAxis />

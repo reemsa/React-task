@@ -139,8 +139,12 @@ export default function PaginatedTable({
                     : rows
                   ).map((row, index) => (
                     <TableRow key={index}>
-                      {Object.values(row).map((value) => (
-                        <StyledTableCell component="th" scope="row">
+                      {Object.values(row).map((value, index) => (
+                        <StyledTableCell
+                          component="th"
+                          scope="row"
+                          key={`key-${index}`}
+                        >
                           {value}
                         </StyledTableCell>
                       ))}
