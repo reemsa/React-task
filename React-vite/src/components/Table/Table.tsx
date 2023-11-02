@@ -95,9 +95,7 @@ export default function PaginatedTable({
 }: PaginatedTableProps) {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 || rows.length === 0
-      ? Math.max(0, (1 + page) * rowsPerPage - rows.length)
-      : 0;
+    rows.length === 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
@@ -131,13 +129,7 @@ export default function PaginatedTable({
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {(rowsPerPage > 0
-                    ? rows.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                    : rows
-                  ).map((row, index) => (
+                  {rows.map((row, index) => (
                     <TableRow key={index}>
                       {Object.values(row).map((value, index) => (
                         <StyledTableCell

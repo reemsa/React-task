@@ -16,29 +16,19 @@ export function People() {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<Person[]>([]);
-  const [searchResults, setSearchResults] = useState<Person[]>([]);
   const { data, isLoading, isError } = useQuery(
     [QueryKeys.People, page, search],
     () => getPeople(page + 1, search)
   );
   useEffect(() => {
     if (data?.results) {
-      console.log(results);
-      console.log(data.results);
-      search
-        ? setSearchResults(
-            data.count > 10 ? [...searchResults, ...data.results] : data.results
-          )
-        : setResults([...results, ...data.results]);
+      setResults(data.results);
     }
-  }, [data?.results, search]);
+  }, [data?.results]);
 
   const handleSearchChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
-    if (!event.target.value) {
-      setSearchResults([]);
-    }
     // TODO add debounce
     setSearch(event.target.value);
   };
@@ -90,7 +80,7 @@ export function People() {
       />
       <PaginatedTable
         columns={["Name", "Gender", "Height", "Eye color", " "]}
-        rows={getRows(search ? searchResults : results)}
+        rows={getRows(results)}
         count={data?.count}
         page={page}
         setPage={setPage}
