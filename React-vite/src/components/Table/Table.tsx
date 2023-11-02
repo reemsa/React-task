@@ -13,6 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { TablePaginationActions } from "../TablePaginationActions/TablePaginationActions";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { fontFamily } from "../../constants";
+import styles from "./styles.module.scss";
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -108,59 +109,63 @@ export default function PaginatedTable({
   return (
     <ThemeProvider theme={theme}>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight }}>
-          <Table
-            sx={{ minWidth }}
-            aria-label="custom pagination table"
-            stickyHeader
-          >
-            <TableHead>
-              <TableRow>
-                {columns.map((column, index) => {
-                  return (
-                    <StyledTableCell key={index}>{column}</StyledTableCell>
-                  );
-                })}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {isLoading ? (
-                <CircularProgress />
-              ) : (
-                (rowsPerPage > 0
-                  ? rows.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                  : rows
-                ).map((row, index) => (
-                  <TableRow key={index}>
-                    {Object.values(row).map((value) => (
-                      <StyledTableCell component="th" scope="row">
-                        {value}
-                      </StyledTableCell>
-                    ))}
+        {isLoading ? (
+          <div className={styles.spinner}>
+            <CircularProgress />
+          </div>
+        ) : (
+          <>
+            <TableContainer sx={{ maxHeight }}>
+              <Table
+                sx={{ minWidth }}
+                aria-label="custom pagination table"
+                stickyHeader
+              >
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column, index) => {
+                      return (
+                        <StyledTableCell key={index}>{column}</StyledTableCell>
+                      );
+                    })}
                   </TableRow>
-                ))
-              )}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {showPagination && (
-          <StyledTablePagination
-            className="footer"
-            rowsPerPageOptions={[rowsPerPage]}
-            count={count ?? rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            ActionsComponent={TablePaginationActions}
-          />
+                </TableHead>
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? rows.slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                    : rows
+                  ).map((row, index) => (
+                    <TableRow key={index}>
+                      {Object.values(row).map((value) => (
+                        <StyledTableCell component="th" scope="row">
+                          {value}
+                        </StyledTableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {showPagination && (
+              <StyledTablePagination
+                className={styles.footer}
+                rowsPerPageOptions={[rowsPerPage]}
+                count={count ?? rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                ActionsComponent={TablePaginationActions}
+              />
+            )}
+          </>
         )}
       </Paper>
     </ThemeProvider>

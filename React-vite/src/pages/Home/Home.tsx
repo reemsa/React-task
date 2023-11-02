@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { getPeople } from "../../api/people";
@@ -10,6 +9,7 @@ import "./styles.css";
 import { QueryKeys } from "../../constants/queryKeys";
 import { getPeopleId } from "../../utils";
 import { fontFamily } from "../../constants";
+import { Toaster } from "../../components/Toaster/Toaster";
 
 export function Home() {
   const [page, setPage] = useState(0);
@@ -21,7 +21,6 @@ export function Home() {
     () => getPeople(page + 1, search)
   );
   useEffect(() => {
-    console.log(data);
     if (data?.results) {
       search
         ? setSearchResults(data?.results)
@@ -35,7 +34,7 @@ export function Home() {
     if (!event.target.value) {
       setSearchResults([]);
     }
-    // TODO call the same api with the search value
+    // TODO add debounce
     setSearch(event.target.value);
   };
 
@@ -58,11 +57,7 @@ export function Home() {
   };
 
   if (isError) {
-    return (
-      <Alert variant="filled" severity="error">
-        Error fetching data
-      </Alert>
-    );
+    return <Toaster severity="error" message="Error fetching data" />;
   }
 
   return (

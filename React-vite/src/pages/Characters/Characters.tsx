@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
-import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import { QueryKeys } from "../../constants/queryKeys";
 import { getFilms } from "../../api/films";
 import { VictoryChart, VictoryBar, VictoryAxis, VictoryTheme } from "victory";
 import styles from "./styles.module.scss";
+import { getBarColor } from "../../utils";
+import { Toaster } from "../../components/Toaster/Toaster";
 
 export function Characters() {
   const {
@@ -19,43 +20,19 @@ export function Characters() {
   }));
 
   if (isErrorFetchingFilms) {
-    return (
-      <Alert variant="filled" severity="error">
-        Error fetching data
-      </Alert>
-    );
+    return <Toaster severity="error" message="Error fetching data" />;
   }
 
   if (isFilmsLoading) {
     return <CircularProgress />;
   }
 
-  const colors = [
-    "#e8e9ff",
-    "#c3c8fe",
-    "#98a5fe",
-    "#6681ff",
-    "#3463fe",
-    "#0a45f7",
-    "#0030e2",
-    "#001fd1",
-    "#0002bf",
-  ]; // Specific colors for bars
-
-  const getBarColor = (index: number) => {
-    return index > colors.length
-      ? colors[index]
-      : colors[index % colors.length];
-  };
-
   return (
     <div className={styles.page}>
       <div className={styles.container}>
         <label className={styles.title}>Films characters chart</label>
         <VictoryChart domainPadding={{ x: 20 }} theme={VictoryTheme.material}>
-          <VictoryAxis
-            tickFormat={() => ""} // Format tick labels if needed
-          />
+          <VictoryAxis tickFormat={() => ""} />
           <VictoryAxis dependentAxis />
           {films.map((item, index) => {
             return (

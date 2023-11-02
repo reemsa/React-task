@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -11,6 +10,7 @@ import { fetchPersonDetails } from "../../api/people";
 import styles from "./styles.module.scss";
 import PaginatedTable from "../../components/Table/Table";
 import { getFilms } from "../../api/films";
+import { Toaster } from "../../components/Toaster/Toaster";
 
 export function Details() {
   const { peopleId } = useParams();
@@ -44,11 +44,7 @@ export function Details() {
     : [];
 
   if (isError || isErrorFetchingFilms) {
-    return (
-      <Alert variant="filled" severity="error">
-        Error fetching data
-      </Alert>
-    );
+    return <Toaster severity="error" message="Error fetching data" />;
   }
 
   if (isLoading || isFilmsLoading) {
