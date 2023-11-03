@@ -15,8 +15,8 @@ export function Characters() {
     isError: isErrorFetchingFilms,
   } = useQuery([QueryKeys.Films], () => getFilms());
 
-  const films = data.map((film) => ({
-    x: film.title,
+  const films = data.map((film, index) => ({
+    x: `${film.title} - ${index}`,
     y: film.characters.length,
   }));
 
@@ -27,7 +27,7 @@ export function Characters() {
   if (isFilmsLoading) {
     return <CircularProgress />;
   }
-
+  // TODO if the films count are so large we would consider showing the first
   return (
     <div className={styles.page}>
       <div className={styles.container}>
@@ -45,7 +45,7 @@ export function Characters() {
                 style={{
                   data: {
                     fill: getBarColor(index),
-                    width: 20,
+                    width: 120 / films.length,
                   },
                 }}
               />
