@@ -63,7 +63,7 @@ export function Characters() {
                     backgroundColor: getBarColor(index),
                   }}
                 />
-                <label key={film.x}>{`Film ${index + 1}`}</label>
+                <label key={film.x}>{film.x}</label>
               </div>
             );
           })}
