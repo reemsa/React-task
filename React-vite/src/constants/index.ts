@@ -13,3 +13,11 @@ export const BAR_COLORS = [
   "#001fd1",
   "#0002bf",
 ];
+
+export const PEOPLE_TABLE_COLUMNS = [
+  "Name",
+  "Gender",
+  "Height",
+  "Eye color",
+  " ",
+];

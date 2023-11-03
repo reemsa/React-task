@@ -5,7 +5,7 @@ import { getPeople } from "../../api/people";
 import PaginatedTable from "../../components/Table/Table";
 import { Person } from "../../types/people";
 import { QueryKeys } from "../../constants/queryKeys";
-import { fontFamily } from "../../constants";
+import { PEOPLE_TABLE_COLUMNS, fontFamily } from "../../constants";
 import { Toaster } from "../../components/Toaster/Toaster";
 import { Link } from "../../components/Link/Link";
 import styles from "./styles.module.scss";
@@ -58,7 +58,7 @@ export function People() {
         }}
       />
       <PaginatedTable
-        columns={["Name", "Gender", "Height", "Eye color", " "]}
+        columns={PEOPLE_TABLE_COLUMNS}
         rows={getRows(results)}
         count={data?.count}
         page={page}

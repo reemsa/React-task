@@ -56,7 +56,7 @@ export function Characters() {
         <div className={styles["label-container"]}>
           {films.map((film, index) => {
             return (
-              <div className={styles["sub-label"]}>
+              <div className={styles["sub-label"]} key={index}>
                 <span
                   className={styles.icon}
                   style={{
