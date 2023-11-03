@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -11,6 +11,7 @@ import styles from "./styles.module.scss";
 import PaginatedTable from "../../components/Table/Table";
 import { getFilms } from "../../api/films";
 import { Toaster } from "../../components/Toaster/Toaster";
+import { Link } from "../../components/Link/Link";
 
 export function Details() {
   const { peopleId } = useParams();
@@ -53,9 +54,7 @@ export function Details() {
 
   return (
     <div>
-      <Link className={styles.label} to="/people">
-        Person Detail Page:
-      </Link>
+      <Link to="/people" text="Person Detail Page:" />
       <div className={styles["details-container"]}>
         <div className={styles["left-container"]}>
           <List>

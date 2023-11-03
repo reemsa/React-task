@@ -1,5 +1,5 @@
-import "./styles.css";
 import { Link } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 export function Home() {
   return (
@@ -7,12 +7,12 @@ export function Home() {
       <nav>
         <ul>
           <li>
-            <Link to="/people" className="link">
+            <Link to="/people" className={styles.link}>
               People
             </Link>
           </li>
           <li>
-            <Link to="/characters" className="link">
+            <Link to="/characters" className={styles.link}>
               Characters
             </Link>
           </li>

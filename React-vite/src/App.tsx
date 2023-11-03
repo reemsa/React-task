@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
@@ -6,8 +6,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import People from "./pages/People";
 
 const queryClient = new QueryClient();
-const CharactersLazy = React.lazy(() => import("./pages/Characters"));
-const DetailsLazy = React.lazy(() => import("./pages/Details"));
+const CharactersLazy = lazy(() => import("./pages/Characters"));
+const DetailsLazy = lazy(() => import("./pages/Details"));
 
 function App() {
   return (
