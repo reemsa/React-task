@@ -10,12 +10,12 @@ import { Link } from "../../components/Link/Link";
 
 export function Characters() {
   const {
-    data,
+    data = [],
     isLoading: isFilmsLoading,
     isError: isErrorFetchingFilms,
   } = useQuery([QueryKeys.Films], () => getFilms());
 
-  const films = (data ?? []).map((film) => ({
+  const films = data.map((film) => ({
     x: film.title,
     y: film.characters.length,
   }));
